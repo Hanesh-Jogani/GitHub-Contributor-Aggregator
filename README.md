@@ -13,6 +13,24 @@ An API Service to fetch the statistics of the contributors of user specified Git
   - AWS Lambda
 
 ## Installation
+### Create Virtual Environment
+virtualenv is used to manage Python packages for different projects. Using virtualenv allows you to avoid installing Python packages globally which could break system tools or other projects. You can install virtualenv using pip.
+* Install Virtualenv
+```
+pip install virtualenv
+```
+
+* Create a Virtual Environment
+```
+python -m venv env
+```
+
+* Activate the Virtual Environment
+```
+.\env\Scripts\activate
+```
+
+### Install the Packages
 * [Pandas](https://pandas.pydata.org/)
 ```
 pip install pandas
@@ -27,3 +45,6 @@ pip install requests
 ```
 pip install PyMySQL
 ```
+
+## Getting Started
+
