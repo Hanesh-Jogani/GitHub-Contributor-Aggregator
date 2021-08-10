@@ -47,4 +47,12 @@ pip install PyMySQL
 ```
 
 ## Getting Started
+* Clone the Project
+```
+git clone https://github.com/Hanesh-Jogani/GitHub-Contributor-Aggregator.git
+```
 
+* Navigate to the Project Directory
+```
+cd GitHub-Contributor-Aggregator
+``` 
