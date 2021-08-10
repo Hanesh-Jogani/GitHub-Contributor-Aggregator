@@ -21,8 +21,8 @@ from datetime import date
 
 # Pre-Input Data
 Repo_Name = 'hashicorp/consul'  # Repository Name
-Start_Date = '2021-04-01'       # Start Date of Range
-End_Date = '2021-07-31'         # End Date of Range
+Start_Date = '2021-08-01'       # Start Date of Range
+End_Date = '2021-08-09'         # End Date of Range
 
 Auth = {'Authorization': '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'}    # Authorization Token
 Run_Date = date.today()         # Run_Date to get today's date
@@ -34,7 +34,7 @@ Page_Number = 1
 
 # Fetching the JSON Data from the API
 while True:
-    # URL to which the Request will be sent to
+    # URL to which the Request will be sent to fetch the details of the Commits and all other stuffs
     url = f"https://api.github.com/repos/{Repo_Name}/commits?page={Page_Number}&since={Start_Date}&until={End_Date}"
 
     # Getting the request
@@ -54,7 +54,12 @@ while True:
         # Incrementing the 'Page_Number'
         Page_Number = Page_Number + 1
     else:
-        # If no 'Request' has been received then it will break the loop and exit it
+        # If no 'Request' has been received then it will run the following and break the loop and exit it
+        # URL to which the Request will be sent to fetch the Languages
+        url = f"https://api.github.com/repos/{Repo_Name}/languages"
+
+        # Getting the request
+        Response = requests.get(url, Auth).json()
         break
 
 New_Data_Frame = Data_Frame                     # Copying it to New DataFrame
@@ -99,6 +104,7 @@ for Request in New_Data_Frame['commit']:
 print(f'Total Companies:- {len(Output_Json)}-{list(Output_Json.keys())}')  # Printing the Domain/Companies name
 print(f'Total Contributions:- {Length_Sum}')                               # Printing the Count of Total Contributions made
 print(f'Unique Contributors:- {Unique_Sum}')                               # Printing the Count of Unique Contributors who have contributed
+print(f'Languages Used (Bytes):- {Response}')                              # Printing the Languages
 print(f'Output:- {Output_Json}')                                           # Printing the Required Json Data
 
 
