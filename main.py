@@ -12,6 +12,9 @@ ID, Repo Name, Domain Name, Count, Date range parameter, Date of Run collected u
 import requests
 import pandas as pd
 from datetime import date
+import pymysql
+import random
+import string
 
 # Input - GitHub Username & Date Range
 # Repo_Name = input("Enter the GitHub Repository Name (Username/Repo Name):- ")
@@ -21,8 +24,8 @@ from datetime import date
 
 # Pre-Input Data
 Repo_Name = 'hashicorp/consul'  # Repository Name
-Start_Date = '2021-08-01'       # Start Date of Range
-End_Date = '2021-08-09'         # End Date of Range
+Start_Date = '2021-05-08'       # Start Date of Range
+End_Date = '2021-08-10'         # End Date of Range
 
 Auth = {'Authorization': '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'}    # Authorization Token
 Run_Date = date.today()         # Run_Date to get today's date
@@ -60,6 +63,16 @@ while True:
 
         # Getting the request
         Response = requests.get(url, Auth).json()
+        total = 0
+
+        # Calculating the Total Bytes
+        for subject in Response:
+            total += Response[subject]
+
+        # Calculating the Percentage
+        for subject in Response:
+            percentage = round((Response[subject] / total * 100), 2)
+            Response[subject] = f'{percentage}%'
         break
 
 New_Data_Frame = Data_Frame                     # Copying it to New DataFrame
@@ -104,11 +117,21 @@ for Request in New_Data_Frame['commit']:
 print(f'Total Companies:- {len(Output_Json)}-{list(Output_Json.keys())}')  # Printing the Domain/Companies name
 print(f'Total Contributions:- {Length_Sum}')                               # Printing the Count of Total Contributions made
 print(f'Unique Contributors:- {Unique_Sum}')                               # Printing the Count of Unique Contributors who have contributed
-print(f'Languages Used (Bytes):- {Response}')                              # Printing the Languages
+print(f'Languages Used:- {Response}')                                      # Printing the Languages
 print(f'Output:- {Output_Json}')                                           # Printing the Required Json Data
 
+date_of_run = date.today()
 
-"""
+for x in Output_Json:
+    z = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(10)])
+    connection = pymysql.connect(host="localhost", user="root", password='', database='mydb')
+    cur = connection.cursor()
+    cur.execute("INSERT INTO mydb.GitHub (UNIQUE_ID, REPO_NAME, DOMAIN_NAME, TOTAL_CONTRI, UNIQUE_CONTRI, COMMIT_DATE, DATE_OF_RUN) VALUES (%s,%s,%s,%s,%s,%s,%s)",
+                (str(z), str(x), str(Repo_Name), str(Output_Json[x]['Total Contributions']), str(Output_Json[x]['Unique Contributors']),
+                 str(Output_Json[x]['Date']), str(date_of_run)))
+    connection.commit()
+
+"""                                                 
 Input : Repository name
 Output: Company domain name, along with total number of commits and total number of contributors
 
