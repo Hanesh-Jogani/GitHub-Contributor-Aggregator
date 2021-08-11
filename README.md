@@ -1,6 +1,7 @@
 # GitHub Contributor Aggregator
 An API Service to fetch the statistics of the contributors of user specified GitHub Repositories in the Amazon Web Services Environment.
 
+
 ## Tech Stack
 - Python
   - Pandas
@@ -11,6 +12,7 @@ An API Service to fetch the statistics of the contributors of user specified Git
   - AWS Secret Manager
   - AWS RDS
   - AWS Lambda
+
 
 ## Installation
 ### Create Virtual Environment
@@ -56,3 +58,8 @@ git clone https://github.com/Hanesh-Jogani/GitHub-Contributor-Aggregator.git
 ```
 cd GitHub-Contributor-Aggregator
 ``` 
+
+* Run the main.py file
+```
+python main.py
+```
