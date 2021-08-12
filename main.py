@@ -120,15 +120,23 @@ print(f'Unique Contributors:- {Unique_Sum}')                               # Pri
 print(f'Languages Used:- {Response}')                                      # Printing the Languages
 print(f'Output:- {Output_Json}')                                           # Printing the Required Json Data
 
+# Get Today's Date
 date_of_run = date.today()
 
+# Loop for Storing the data into Database
 for x in Output_Json:
+    # Generating combination of random letters and digits upto length 10
     z = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(10)])
+    
+    # Establishing the connection/Connecting to the Database
     connection = pymysql.connect(host="localhost", user="root", password='', database='mydb')
     cur = connection.cursor()
+    
+    # Query for Inserting into Database
     cur.execute("INSERT INTO mydb.GitHub (UNIQUE_ID, REPO_NAME, DOMAIN_NAME, TOTAL_CONTRI, UNIQUE_CONTRI, COMMIT_DATE, DATE_OF_RUN) VALUES (%s,%s,%s,%s,%s,%s,%s)",
-                (str(z), str(x), str(Repo_Name), str(Output_Json[x]['Total Contributions']), str(Output_Json[x]['Unique Contributors']),
-                 str(Output_Json[x]['Date']), str(date_of_run)))
+                (str(z), str(x), str(Repo_Name), str(Output_Json[x]['Total Contributions']), str(Output_Json[x]['Unique Contributors']), str(Output_Json[x]['Date']), str(date_of_run)))
+    
+    # Commiting the changes in the Database
     connection.commit()
 
 """                                                 
