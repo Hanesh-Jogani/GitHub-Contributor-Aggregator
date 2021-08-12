@@ -2,6 +2,10 @@
 An API Service to fetch the statistics of the contributors of user specified GitHub Repositories in the Amazon Web Services Environment.
 
 
+## High Level Diagram
+![image](https://user-images.githubusercontent.com/62371149/129132556-ac64f3f9-f039-45a3-9613-a71cfef426f4.png)
+
+
 ## Tech Stack
 - Python
   - Pandas
@@ -48,6 +52,7 @@ pip install requests
 pip install PyMySQL
 ```
 
+
 ## Getting Started
 * Clone the Project
 ```
@@ -58,6 +63,8 @@ git clone https://github.com/Hanesh-Jogani/GitHub-Contributor-Aggregator.git
 ```
 cd GitHub-Contributor-Aggregator
 ``` 
+
+* Install the Packages as shown above
 
 * Run the main.py file
 ```
