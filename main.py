@@ -67,13 +67,13 @@ while True:
 
         # Calculating the Total Bytes
         for x in Response:
-            Total_Bytes += Response[subject]
+            Total_Bytes += Response[x]
 
         # Calculating the Percentage
         for x in Response:
             # Calculating the Percentage and rounding of to 2 places
             Percentage = round((Response[x] / Total_Bytes * 100), 2)
-            Response[subject] = f'{Percentage}%'
+            Response[x] = f'{Percentage}%'
         break
 
 New_Data_Frame = Data_Frame                     # Copying it to New DataFrame
