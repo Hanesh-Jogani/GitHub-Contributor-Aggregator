@@ -33,7 +33,7 @@ Data_Frame = pd.DataFrame()     # Creating Pandas DataFrame to store in the data
 Output_Json = {}                # Output_Json will contain the main output of the code
 Length_Sum = 0                  # To keep the count of the Total Contributions made
 Unique_Sum = 0                  # To keep the count of the Unique Contributors
-Page_Number = 1
+Page_Number = 1                 # Page_Number for getting requests from more than 1 page
 
 # Fetching the JSON Data from the API
 while True:
@@ -63,24 +63,25 @@ while True:
 
         # Getting the request
         Response = requests.get(url, Auth).json()
-        total = 0
+        Total_Bytes = 0         # To keep the count of the Total Bytes
 
         # Calculating the Total Bytes
-        for subject in Response:
-            total += Response[subject]
+        for x in Response:
+            Total_Bytes += Response[subject]
 
         # Calculating the Percentage
-        for subject in Response:
-            percentage = round((Response[subject] / total * 100), 2)
-            Response[subject] = f'{percentage}%'
+        for x in Response:
+            # Calculating the Percentage and rounding of to 2 places
+            Percentage = round((Response[x] / Total_Bytes * 100), 2)
+            Response[subject] = f'{Percentage}%'
         break
 
 New_Data_Frame = Data_Frame                     # Copying it to New DataFrame
 
 # Processing the JSON Data Received from the API
 for Request in New_Data_Frame['commit']:
-    Email_Id = Request['author']['email']       # Taking the Email ID of the Author
-    Email_End = Email_Id.split('@')             # Splitting the Email ID into Username and Domain Name
+    Email_Id = Request['author']['email']       # Taking the Email Id of the Author
+    Email_End = Email_Id.split('@')             # Splitting the Email Id into Username and Domain Name
 
     Company = Email_End[1].rsplit('.', 1)       # Splitting the Domain Name into the Company Name and the Extension
     Company_Name = Company[0]                   # Storing the Company Initial Name
@@ -98,7 +99,7 @@ for Request in New_Data_Frame['commit']:
         Output_Json[Company_Name] = {'Total Contributions': 1, 'Unique Contributors': 0, 'Users': [], 'Date': []}
 
     # Loop for Processing the Unique Contributors
-    # If the particular 'Email_ID' is already present then the loop won't run, whereas if it's not present then the loop will run
+    # If the particular 'Email_Id' is already present then the loop won't run, whereas if it's not present then the loop will run
     if Email_Id not in Output_Json[Company_Name]['Users']:
         # Adding the Users Email_Id inorder to make the 'Unique Contributors'
         Output_Json[Company_Name]['Users'].append(Email_Id)
