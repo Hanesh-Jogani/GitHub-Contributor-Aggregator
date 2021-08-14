@@ -11,11 +11,10 @@ ID, Repo Name, Domain Name, Count, Date range parameter, Date of Run collected u
 # Importing Necessary Packages/Libraries
 import requests
 import pandas as pd
-from datetime import date
 import pymysql
-import random
-import string
+from datetime import date, datetime
 
+Start_Time = datetime.now()
 # Input - GitHub Username & Date Range
 # Repo_Name = input("Enter the GitHub Repository Name (Username/Repo Name):- ")
 # Start_Date = input("Enter the Start Date (YYYY-MM-DD):- ")
@@ -24,8 +23,8 @@ import string
 
 # Pre-Input Data
 Repo_Name = 'hashicorp/consul'  # Repository Name
-Start_Date = '2021-05-08'       # Start Date of Range
-End_Date = '2021-08-10'         # End Date of Range
+Start_Date = '2021-07-01'       # Start Date of Range
+End_Date = '2021-08-13'         # End Date of Range
 
 Auth = {'Authorization': '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'}    # Authorization Token
 Run_Date = date.today()         # Run_Date to get today's date
@@ -121,24 +120,33 @@ print(f'Unique Contributors:- {Unique_Sum}')                               # Pri
 print(f'Languages Used:- {Response}')                                      # Printing the Languages
 print(f'Output:- {Output_Json}')                                           # Printing the Required Json Data
 
-# Get Today's Date
-date_of_run = date.today()
-
 # Loop for Storing the data into Database
+# Establishing the connection/Connecting to the Database
+connection = pymysql.connect(host="localhost", user="root", password="", database="mydb")
+cur = connection.cursor()
+
+# Query for Fetching the last 'UNIQUE_ID' from the Database
+cur.execute("SELECT UNIQUE_ID FROM mydb.GitHub ORDER BY UNIQUE_ID DESC LIMIT 1;")
+
+Unique_Id = cur.fetchall()
+# Loop for Checking whether the Unique_Id is empty or not
+if not Unique_Id:
+    Unique_Id = 0
+else:
+    Unique_Id = int(Unique_Id[0][0])
+
 for x in Output_Json:
-    # Generating combination of random letters and digits upto length 10
-    z = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(10)])
-    
-    # Establishing the connection/Connecting to the Database
-    connection = pymysql.connect(host="localhost", user="root", password='', database='mydb')
-    cur = connection.cursor()
+    Unique_Id = Unique_Id + 1
     
     # Query for Inserting into Database
     cur.execute("INSERT INTO mydb.GitHub (UNIQUE_ID, REPO_NAME, DOMAIN_NAME, TOTAL_CONTRI, UNIQUE_CONTRI, COMMIT_DATE, DATE_OF_RUN) VALUES (%s,%s,%s,%s,%s,%s,%s)",
-                (str(z), str(x), str(Repo_Name), str(Output_Json[x]['Total Contributions']), str(Output_Json[x]['Unique Contributors']), str(Output_Json[x]['Date']), str(date_of_run)))
+                (str(result), str(x), str(Repo_Name), str(Output_Json[x]['Total Contributions']), str(Output_Json[x]['Unique Contributors']), str(Output_Json[x]['Date']), str(Run_Date)))
     
-    # Commiting the changes in the Database
+    # Committing the changes in the Database
     connection.commit()
+
+End_Time = datetime.now()
+print(f'Execution Time:- {End_Time - Start_Time}')                      # Printing the Execution Time
 
 """                                                 
 Input : Repository name
