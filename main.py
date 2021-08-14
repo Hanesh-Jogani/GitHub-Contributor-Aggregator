@@ -137,11 +137,11 @@ else:
 
 for x in Output_Json:
     Unique_Id = Unique_Id + 1
-    
+
     # Query for Inserting into Database
     cur.execute("INSERT INTO mydb.GitHub (UNIQUE_ID, REPO_NAME, DOMAIN_NAME, TOTAL_CONTRI, UNIQUE_CONTRI, COMMIT_DATE, DATE_OF_RUN) VALUES (%s,%s,%s,%s,%s,%s,%s)",
-                (str(result), str(x), str(Repo_Name), str(Output_Json[x]['Total Contributions']), str(Output_Json[x]['Unique Contributors']), str(Output_Json[x]['Date']), str(Run_Date)))
-    
+                (str(Unique_Id), str(Repo_Name), str(x), str(Output_Json[x]['Total Contributions']), str(Output_Json[x]['Unique Contributors']), str(Output_Json[x]['Date']), str(Run_Date)))
+
     # Committing the changes in the Database
     connection.commit()
 
