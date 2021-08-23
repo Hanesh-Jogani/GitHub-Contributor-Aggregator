@@ -3,7 +3,7 @@ An API Service to fetch the statistics of the contributors of user specified Git
 
 
 ## High Level Diagram
-![image](https://user-images.githubusercontent.com/62371149/129132556-ac64f3f9-f039-45a3-9613-a71cfef426f4.png)
+![image](https://user-images.githubusercontent.com/62371149/130456494-4be297f1-0dd4-43df-b4c0-8255000b9758.png)
 
 
 ## Tech Stack
