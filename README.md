@@ -13,9 +13,26 @@ An API Service to fetch the statistics of the contributors of user specified Git
   - PyMySQL
 - AWS
   - AWS API Gateway
-  - AWS Secret Manager
   - AWS RDS
   - AWS Lambda
+
+
+## Concepts
+- Pagination
+  - Pagination is a technique for partitioning web content into discrete pages, inorder to display the  content in a limited and absorbable way. For instance, imagine working with a API and where one has sent a request to the API and in return you get a huge data, so in order to display it on a single page you spread it among different more pages to make it look aesthetic, and also the client/user gets an idea of the total pages the data is stored over.
+  - GitHub Documentation - [Click Here](https://docs.github.com/en/rest/guides/traversing-with-pagination)
+
+- API Processing
+  -  API is the abbreviation for Application Programming Interface, which is a software go-between that permits two applications to converse with one another. Each time you utilize an application like Facebook, send a text, or genuinely look at the climate on your telephone, you're utilizing an API. Processing the data received from the API inorder to get the desired data accorrding to the client/user is what is know as API Processing.
+  -  GitHub REST API - [Click Here](https://docs.github.com/en/rest)
+
+- RDS
+  - Amazon RDS is an relational database help that gives you six recognizable dataset services to browse, including Amazon Aurora, MySQL, MariaDB, Oracle, Microsoft SQL Server, and PostgreSQL. This implies that the code, applications, and devices you as of now use today with your current database can be utilized with Amazon RDS.
+  - AWS Documentation - [Click Here](https://aws.amazon.com/rds/)
+
+- Execution Time
+  -  The execution time of a given task is characterized as the time spent by the system/framework executing that assignment, in alternate manner one can say the time during which a program is running.
+  -  In Python, one can use `time` or `datetime` for fetching the time at different stages of the code and post manipulating the differnece of time you get the Execution Time.
 
 
 ## Installation
