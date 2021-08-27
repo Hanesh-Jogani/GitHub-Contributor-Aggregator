@@ -6,6 +6,10 @@ An API Service to fetch the statistics of the contributors of user specified Git
 ![image](https://user-images.githubusercontent.com/62371149/130456494-4be297f1-0dd4-43df-b4c0-8255000b9758.png)
 
 
+## Output Demo
+https://user-images.githubusercontent.com/62371149/131164285-800c3759-0ac4-4434-8abf-cfdf2cb51d6a.mp4
+
+
 ## Concepts
 * Pagination
   * Pagination is a technique for partitioning web content into discrete pages, inorder to display the  content in a limited and absorbable way. For instance, imagine working with a API and where one has sent a request to the API and in return you get a huge data, so in order to display it on a single page you spread it among different more pages to make it look aesthetic, and also the client/user gets an idea of the total pages the data is stored over.
