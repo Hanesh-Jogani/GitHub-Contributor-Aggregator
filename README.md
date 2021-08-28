@@ -7,7 +7,21 @@ An API Service to fetch the statistics of the contributors of user specified Git
 
 
 ## Output Demo
+* Demo Video 01
+```
+Enter the GitHub Repository Name (Username/Repo Name):- hashicorp/consul
+Enter the Start Date (YYYY-MM-DD):- 2021-01-01
+Enter the End Date (YYYY-MM-DD):- 2021-08-26
+```
 https://user-images.githubusercontent.com/62371149/131164285-800c3759-0ac4-4434-8abf-cfdf2cb51d6a.mp4
+
+* Demo Video 02
+```
+Enter the GitHub Repository Name (Username/Repo Name):- hashicorp/consul
+Enter the Start Date (YYYY-MM-DD):- 2010-01-01
+Enter the End Date (YYYY-MM-DD):- 2021-08-27
+```
+https://user-images.githubusercontent.com/62371149/131207592-485aeb7b-50c5-40f4-9111-8cd7a844e429.mp4
 
 
 ## Concepts
